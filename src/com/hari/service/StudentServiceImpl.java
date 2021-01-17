@@ -16,14 +16,17 @@ public class StudentServiceImpl implements com.hari.service.StudentService {
 
 	@Override
 	public Student searchStudent(String sid) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("service");
+		StudentDao dao=StudentDaoFactory.getStudentDao(); 
+		Student s=dao.search(sid);
+		return s;
 	}
 
 	@Override
 	public String deleteStudent(String sid) {
-		// TODO Auto-generated method stub
-		return null;
+		StudentDao dao=StudentDaoFactory.getStudentDao(); 
+		String status=dao.delete(sid);
+		return status;
 	}
 
 }
