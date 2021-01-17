@@ -50,14 +50,53 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public Student search(String sid) {
-		// TODO Auto-generated method stub
-		return null;
+		Student s=new Student();
+		try {
+			System.out.println("Dao");
+			String sql = "select*from studentdao where sid=?";
+			pst = con1.prepareStatement(sql);
+			pst.setString(1, sid);
+			rs = pst.executeQuery();
+			boolean val=rs.next();
+			if(val==true)
+			{
+				s.setSid(rs.getString(1));
+				s.setSname(rs.getString(2));
+				s.setScity(rs.getString(3));
+			}
+			else if(val==false)
+			{
+				s=null;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return s;
 	}
 
 	@Override
 	public String delete(String sid) {
-		// TODO Auto-generated method stub
-		return null;
+		String status="";
+		try
+		{
+			String sql="delete from studentdao where sid=?";
+			pst = con1.prepareStatement(sql);
+			pst.setString(1, sid);
+			int k=pst.executeUpdate();
+			if(k==1)
+				status="success";
+			else
+				status="fail";
+		}
+		catch(Exception e)
+		{
+			status="fail";
+			e.printStackTrace();
+		}
+
+		return status;
 	}
 
 }
